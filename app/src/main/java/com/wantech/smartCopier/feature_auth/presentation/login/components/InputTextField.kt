@@ -1,11 +1,11 @@
 package com.wantech.smartCopier.feature_auth.presentation.login.components
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -25,7 +25,7 @@ fun InputTextField(
     textValue: String,
     labelText: String,
     maxLines: Int = 1,
-    first:Boolean=false,
+    first: Boolean = false,
     singleLine: Boolean = true,
     tittle: String = "",
     trailingIconResource: Int? = null,
@@ -42,14 +42,14 @@ fun InputTextField(
             .padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
-        val keyBoardController =LocalSoftwareKeyboardController.current
+        val keyBoardController = LocalSoftwareKeyboardController.current
         OutlinedTextField(
             value = textValue,
             onValueChange = onValueChange,
             keyboardOptions = keyboardOptions,
-//            label = TextFieldLabel(string = labelText),
+            label = { Text(text = labelText) },
             trailingIcon = {
-               AddIcon(
+                AddIcon(
                     trailingIcon = trailingIcon,
                     trailingIconResource
                 )
@@ -63,8 +63,15 @@ fun InputTextField(
             keyboardActions = KeyboardActions(
                 onDone = {
                     keyBoardController?.hide()
-                }
-            )
+                },
+
+                ),
+            colors = TextFieldDefaults.textFieldColors(
+                unfocusedIndicatorColor = MaterialTheme.colors.background,
+                unfocusedLabelColor = MaterialTheme.colors.background,
+                placeholderColor = MaterialTheme.colors.background,
+
+                )
 
 
         )

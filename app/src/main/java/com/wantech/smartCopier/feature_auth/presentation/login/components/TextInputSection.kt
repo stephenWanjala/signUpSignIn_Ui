@@ -1,7 +1,7 @@
 package com.wantech.smartCopier.feature_auth.presentation.login.components
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -9,7 +9,6 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -20,7 +19,8 @@ import com.wantech.smartCopier.R
 fun TextInPutSection(
     buttonLabel: String,
     onClickLoginButton: () -> Unit,
-    onClickToSignUp:()->Unit
+    onClickToSignUp: () -> Unit,
+    onForgetPassword:()->Unit
 ) {
     var emailFieldState by remember {
         mutableStateOf("")
@@ -29,58 +29,104 @@ fun TextInPutSection(
         mutableStateOf("")
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
+    LazyColumn {
+        item {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
 
 
-       InputTextField(
-            textValue = emailFieldState,
-            labelText = "Email",
-            tittle = "Example@gmail.com",
-            trailingIcon = Icons.Default.Email,
-            onValueChange = { emailFieldState = it },
-            first = true
-        )
-      InputTextField(
-            textValue = passwordState,
-            labelText = "Email",
-            tittle = "Example@gmail.com",
-            trailingIconResource = R.drawable.ic_eye,
-            onValueChange = { passwordState = it },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Password, imeAction = ImeAction.Done
-            )
-        )
+                InputTextField(
+                    textValue = emailFieldState,
+                    labelText = "Email",
+                    tittle = "Example@gmail.com",
+                    trailingIcon = Icons.Default.Email,
+                    onValueChange = { emailFieldState = it },
+                    first = true
+                )
+//               TODO("Fix toggle password Icon and text transform")
+                InputTextField(
+                    textValue = passwordState,
+                    labelText = "Password",
+                    tittle = "Your Password",
 
-        AButton(
-            text = buttonLabel,
-            onClick = onClickLoginButton,
-            modifier = Modifier
-        )
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-        ) {
+                    trailingIconResource = R.drawable.ic_eye,
+                    onValueChange = { passwordState = it },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Password, imeAction = ImeAction.Done
+                    )
+                )
 
-            Text(
-                text ="Don't Have an Account?",
-                color = MaterialTheme.colors.onSurface.copy(alpha = 0.7f),
-                modifier = Modifier.padding(start = 16.dp),
-                fontWeight = FontWeight.ExtraLight
-            )
-            Spacer(modifier = Modifier.width(4.dp))
-            Text(text = "SignUp",
-            modifier = Modifier.clickable { onClickToSignUp },
-            color = MaterialTheme.colors.onSurface,
-                fontWeight = FontWeight.ExtraBold
-            )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    val checkedT = remember {
+                        mutableStateOf(false)
+                    }
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Checkbox(
+                        checked = checkedT.value, onCheckedChange = {
+                            checkedT.value = it
+                        },
+                        colors = CheckboxDefaults.colors(
+                            checkedColor = MaterialTheme.colors.primary,
+                            uncheckedColor = MaterialTheme.colors.surface,
+//                    checkmarkColor = Color.Magenta
+                        ),
+                        modifier = Modifier.padding(start = 8.dp)
+                    )
+                    Text(
+                        text = "Remember Me",
+                        style = MaterialTheme.typography.caption
+                        )
 
+                    Spacer(modifier = Modifier.width(8.dp))
+                    TextButton(
+                        onClick =  onForgetPassword,
+                        modifier = Modifier.wrapContentHeight(),
+                        contentPadding = PaddingValues(1.dp),
+                    ) {
+                        Text(
+                            text = "Forgot password?",
+                            color = MaterialTheme.colors.surface,
+                            style = MaterialTheme.typography.caption,
+                        )
+                    }
+                }
+                AButton(
+                    text = buttonLabel,
+                    onClick = onClickLoginButton,
+                    modifier = Modifier
+                )
+
+                TextButton(
+                    onClick = onClickToSignUp,
+                    modifier = Modifier.fillMaxWidth(),
+                    contentPadding = PaddingValues(2.dp)
+                ) {
+                    Text(
+                        text = "Don't Have Account?",
+                        color = MaterialTheme.colors.surface,
+//                    modifier = Modifier.fillMaxWidth(0.7f)
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = "Sign Up",
+                        color = MaterialTheme.colors.surface,
+                        modifier = Modifier
+//                        .fillMaxWidth(0.7f)
+                            .padding(4.dp)
+                    )
+                }
+
+            }
         }
     }
 }
+
+
