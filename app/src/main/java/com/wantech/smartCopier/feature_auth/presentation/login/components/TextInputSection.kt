@@ -6,16 +6,11 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -32,6 +27,7 @@ fun TextInPutSection(
     var passwordState by remember {
         mutableStateOf("")
     }
+    var passwordVisibility: Boolean by remember { mutableStateOf(false) }
 
     LazyColumn {
         item {
@@ -51,20 +47,19 @@ fun TextInPutSection(
                     onValueChange = { emailFieldState = it },
                     first = true
                 )
-                var passwordVisibility: Boolean by remember { mutableStateOf(false) }
+
 //               TODO("Fix toggle password Icon and text transform")
-                InputTextField(
+                PasswordTextField(
                     textValue = passwordState,
                     labelText = "Password",
                     tittle = "Your Password",
-                    trailingIcon = TogglePasswordVisibility(isVisible =passwordVisibility ){ changeParam(passwordVisibility)}  ,
                     trailingIconResource = null,
                     onValueChange = { passwordState = it },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Password, imeAction = ImeAction.Done
                     ),
-                    visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation('*')
-                )
+
+                    )
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -128,14 +123,14 @@ fun TextInPutSection(
                     Text(
                         text = "Don't Have Account?",
                         color = MaterialTheme.colors.surface,
-//                    modifier = Modifier.fillMaxWidth(0.7f)
+
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = "Sign Up",
                         color = MaterialTheme.colors.surface,
                         modifier = Modifier
-//                        .fillMaxWidth(0.7f)
+//
                             .padding(4.dp)
                     )
                 }
@@ -145,21 +140,3 @@ fun TextInPutSection(
     }
 }
 
-
-@Composable
-fun TogglePasswordVisibility(isVisible: Boolean,changeMe:()->Boolean): ImageVector {
-    var bool:Boolean=isVisible
-    var icon:ImageVector =Icons.Default.Visibility
-    IconButton(onClick = {
-        bool=!bool
-
-    }) {
-        icon = if (bool){
-            Icons.Default.Visibility
-        } else{
-            Icons.Default.VisibilityOff
-        }
-    }
- return  icon
-}
-fun changeParam(bool: Boolean):Boolean =!bool

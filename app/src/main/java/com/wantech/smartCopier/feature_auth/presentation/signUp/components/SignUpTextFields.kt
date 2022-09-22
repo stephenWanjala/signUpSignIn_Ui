@@ -16,9 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.wantech.smartCopier.R
 import com.wantech.smartCopier.feature_auth.presentation.login.components.AButton
 import com.wantech.smartCopier.feature_auth.presentation.login.components.InputTextField
+import com.wantech.smartCopier.feature_auth.presentation.login.components.PasswordTextField
 
 @Composable
 
@@ -63,17 +63,16 @@ fun SignUpTextFields(
                     onValueChange = { userNameFieldState = it },
                     first = true
                 )
-                InputTextField(
+                PasswordTextField(
                     textValue = passwordState,
                     labelText = "Password",
                     tittle = "Enter your password",
-                    trailingIconResource = R.drawable.ic_eye,
                     onValueChange = { passwordState = it },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Password, imeAction = ImeAction.Done
                     ),
 
-                )
+                    )
 
                 AButton(
                     text = buttonLabel,
@@ -89,14 +88,14 @@ fun SignUpTextFields(
                     Text(
                         text = "Already Have an Account?",
                         color = MaterialTheme.colors.surface,
-//                    modifier = Modifier.fillMaxWidth(0.7f)
-                    )
+
+                        )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = "SIgn In",
                         color = MaterialTheme.colors.surface,
                         modifier = Modifier
-//                        .fillMaxWidth(0.7f)
+//
                             .padding(4.dp)
                     )
                 }
