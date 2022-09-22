@@ -16,7 +16,8 @@ import androidx.compose.ui.unit.dp
 fun AButton(
     text:String,
     onClick:()->Unit,
-    modifier: Modifier
+    modifier: Modifier,
+    buttonEnabled:()->Boolean
 ) {
     Button(
         onClick = onClick,
@@ -24,7 +25,8 @@ fun AButton(
             .fillMaxWidth()
             .padding(start = 32.dp, end = 32.dp)
             .clip(RoundedCornerShape(10.dp)),
-        elevation = ButtonDefaults.elevation(10.dp)
+        elevation = ButtonDefaults.elevation(10.dp),
+        enabled = buttonEnabled()
     ) {
         Text(text = text,
             style = MaterialTheme.typography.button)

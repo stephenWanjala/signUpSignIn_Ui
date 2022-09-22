@@ -51,7 +51,8 @@ fun LoginScreen(navController: NavController) {
                         .padding(start = 32.dp, top = 32.dp),
                     fontWeight = FontWeight.ExtraBold,
                     fontStyle = FontStyle.Normal,
-                    style = MaterialTheme.typography.h6
+                    style = MaterialTheme.typography.h6,
+                    color = MaterialTheme.colors.background
                 )
                 TextInPutSection(
                     buttonLabel = "Sign In",

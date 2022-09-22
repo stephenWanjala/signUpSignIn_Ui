@@ -10,6 +10,7 @@ import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,7 +38,7 @@ fun SignUpTextFields(
         mutableStateOf("")
     }
 
-    LazyColumn() {
+    LazyColumn {
         item {
             Column(
                 modifier = Modifier
@@ -65,8 +66,8 @@ fun SignUpTextFields(
                 )
                 InputTextField(
                     textValue = passwordState,
-                    labelText = "Email",
-                    tittle = "Example@gmail.com",
+                    labelText = "Password",
+                    tittle = "Enter your password",
                     trailingIconResource = R.drawable.ic_eye,
                     onValueChange = { passwordState = it },
                     keyboardOptions = KeyboardOptions(
@@ -77,7 +78,8 @@ fun SignUpTextFields(
                 AButton(
                     text = buttonLabel,
                     onClick = signUpFinally,
-                    modifier = Modifier
+                    modifier = Modifier,
+                    buttonEnabled = { passwordState.isNotBlank() && (passwordState.length >= 6) }
                 )
                 TextButton(
                     onClick = onClickToLogin,

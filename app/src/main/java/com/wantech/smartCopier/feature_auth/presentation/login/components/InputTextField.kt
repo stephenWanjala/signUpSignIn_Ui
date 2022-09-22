@@ -40,7 +40,7 @@ fun InputTextField(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(8.dp),
         contentAlignment = Alignment.Center
     ) {
         val keyBoardController = LocalSoftwareKeyboardController.current

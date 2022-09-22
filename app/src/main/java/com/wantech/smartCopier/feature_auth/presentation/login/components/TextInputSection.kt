@@ -20,7 +20,7 @@ fun TextInPutSection(
     buttonLabel: String,
     onClickLoginButton: () -> Unit,
     onClickToSignUp: () -> Unit,
-    onForgetPassword:()->Unit
+    onForgetPassword: () -> Unit
 ) {
     var emailFieldState by remember {
         mutableStateOf("")
@@ -83,11 +83,11 @@ fun TextInPutSection(
                     Text(
                         text = "Remember Me",
                         style = MaterialTheme.typography.caption
-                        )
+                    )
 
                     Spacer(modifier = Modifier.width(8.dp))
                     TextButton(
-                        onClick =  onForgetPassword,
+                        onClick = onForgetPassword,
                         modifier = Modifier.wrapContentHeight(),
                         contentPadding = PaddingValues(1.dp),
                     ) {
@@ -101,7 +101,17 @@ fun TextInPutSection(
                 AButton(
                     text = buttonLabel,
                     onClick = onClickLoginButton,
-                    modifier = Modifier
+                    modifier = Modifier,
+                    buttonEnabled =
+                    {
+                        passwordState.isNotBlank() &&
+                                ((passwordState.length >= 8)
+                                        && emailFieldState.isNotBlank()
+                                        && android.util.Patterns.EMAIL_ADDRESS.matcher(
+                                    emailFieldState
+                                ).matches())
+                    }
+
                 )
 
                 TextButton(
