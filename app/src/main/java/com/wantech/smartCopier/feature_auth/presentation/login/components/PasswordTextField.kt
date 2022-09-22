@@ -13,7 +13,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -28,11 +27,7 @@ fun PasswordTextField(
     textValue: String,
     labelText: String,
     maxLines: Int = 1,
-    first: Boolean = false,
-    singleLine: Boolean = true,
-    tittle: String = "",
-    trailingIconResource: Int? = null,
-    trailingIcon: ImageVector? = null,
+    placeHolder: String,
     onValueChange: (String) -> Unit,
     keyboardOptions: KeyboardOptions = KeyboardOptions(
         imeAction = ImeAction.Next,
@@ -50,7 +45,7 @@ fun PasswordTextField(
     ) {
         val keyBoardController = LocalSoftwareKeyboardController.current
         OutlinedTextField(
-            value = textValue.take(if (textValue.length>=10) 10 else textValue.length),
+            value = textValue.take(if (textValue.length >= 10) 10 else textValue.length),
             onValueChange = onValueChange,
             keyboardOptions = keyboardOptions,
             label = { Text(text = labelText) },
@@ -58,13 +53,13 @@ fun PasswordTextField(
                 IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
                     Icon(
                         imageVector = if (passwordVisibility) Icons.Default.Visibility else Icons.Default.VisibilityOff,
-                        contentDescription = null
+                        contentDescription = "passwordVisibility Icon"
                     )
                 }
             },
 
             placeholder = {
-                Text(text = labelText)
+                Text(text = placeHolder)
             },
             keyboardActions = KeyboardActions(
                 onDone = {
@@ -87,6 +82,7 @@ fun PasswordTextField(
             ),
             maxLines = maxLines,
 //            singleLine = singleLine
+//            placeholder = placeHolder
         )
 
     }

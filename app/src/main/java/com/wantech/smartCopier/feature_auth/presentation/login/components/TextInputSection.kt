@@ -52,8 +52,8 @@ fun TextInPutSection(
                 PasswordTextField(
                     textValue = passwordState,
                     labelText = "Password",
-                    tittle = "Your Password",
-                    trailingIconResource = null,
+                    placeHolder = "Your Password",
+
                     onValueChange = { passwordState = it },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Password, imeAction = ImeAction.Done
@@ -124,7 +124,7 @@ fun TextInPutSection(
                         text = "Don't Have Account?",
                         color = MaterialTheme.colors.surface,
 
-                    )
+                        )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = "Sign Up",

@@ -66,7 +66,7 @@ fun SignUpTextFields(
                 PasswordTextField(
                     textValue = passwordState,
                     labelText = "Password",
-                    tittle = "Enter your password",
+                    placeHolder = "Enter your password",
                     onValueChange = { passwordState = it },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Password, imeAction = ImeAction.Done
@@ -78,7 +78,12 @@ fun SignUpTextFields(
                     text = buttonLabel,
                     onClick = signUpFinally,
                     modifier = Modifier,
-                    buttonEnabled = { passwordState.isNotBlank() && (passwordState.length >= 6) }
+                    buttonEnabled = {
+                        passwordState.isNotBlank() && (passwordState.length >= 6) &&
+                                userNameFieldState.isNotBlank() && emailFieldState.isNotBlank()
+                                && android.util.Patterns.EMAIL_ADDRESS.matcher(emailFieldState)
+                            .matches()
+                    }
                 )
                 TextButton(
                     onClick = onClickToLogin,
@@ -102,6 +107,5 @@ fun SignUpTextFields(
             }
         }
     }
-
 
 }
