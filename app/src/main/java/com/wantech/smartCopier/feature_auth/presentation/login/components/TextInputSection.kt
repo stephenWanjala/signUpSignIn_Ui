@@ -27,7 +27,7 @@ fun TextInPutSection(
     var passwordState by remember {
         mutableStateOf("")
     }
-    var passwordVisibility: Boolean by remember { mutableStateOf(false) }
+
 
     LazyColumn {
         item {
@@ -48,7 +48,7 @@ fun TextInPutSection(
                     first = true
                 )
 
-//               TODO("Fix toggle password Icon and text transform")
+
                 PasswordTextField(
                     textValue = passwordState,
                     labelText = "Password",
