@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
@@ -70,7 +71,8 @@ fun InputTextField(
                 unfocusedIndicatorColor = MaterialTheme.colors.background,
                 unfocusedLabelColor = MaterialTheme.colors.background,
                 placeholderColor = MaterialTheme.colors.background,
-
+                leadingIconColor = MaterialTheme.colors.background.copy(alpha = 0.9f),
+                trailingIconColor = MaterialTheme.colors.background.copy(alpha = 0.9f)
                 )
 
 

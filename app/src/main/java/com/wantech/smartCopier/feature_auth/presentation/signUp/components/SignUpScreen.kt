@@ -61,6 +61,9 @@ fun SigUpScreen(navController: NavController) {
                         popUpTo(Screen.Home.route)
                     }
                 }) {
+                    navController.navigate(Screen.SignIn.route){
+                        popUpTo(Screen.SignIn.route)
+                    }
 
                 }
             }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.SmartCopier" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:statusBarColor">#47454C</item>
+    <style name="Theme.SmartCopier"
+        parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">#474547</item>
     </style>
 </resources>
