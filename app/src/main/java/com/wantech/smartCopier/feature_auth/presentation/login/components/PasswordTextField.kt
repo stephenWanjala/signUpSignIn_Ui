@@ -38,7 +38,6 @@ fun PasswordTextField(
         imeAction = ImeAction.Next,
         keyboardType = KeyboardType.Email
     ),
-    visualTransformation: VisualTransformation = VisualTransformation.None,
     onSendAction: (() -> Unit?)? = null
 
 ) {
@@ -51,7 +50,7 @@ fun PasswordTextField(
     ) {
         val keyBoardController = LocalSoftwareKeyboardController.current
         OutlinedTextField(
-            value = textValue,
+            value = textValue.take(if (textValue.length>=10) 10 else textValue.length),
             onValueChange = onValueChange,
             keyboardOptions = keyboardOptions,
             label = { Text(text = labelText) },
@@ -86,6 +85,8 @@ fun PasswordTextField(
             visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(
                 '*'
             ),
+            maxLines = maxLines,
+//            singleLine = singleLine
         )
 
     }
