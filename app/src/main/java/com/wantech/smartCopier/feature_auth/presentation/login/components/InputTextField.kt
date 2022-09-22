@@ -10,12 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 
 
@@ -35,7 +35,10 @@ fun InputTextField(
     keyboardOptions: KeyboardOptions = KeyboardOptions(
         imeAction = ImeAction.Next,
         keyboardType = KeyboardType.Email
-    )
+    ),
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    onSendAction: (() -> Unit?)? = null
+
 ) {
     Box(
         modifier = modifier
@@ -65,7 +68,10 @@ fun InputTextField(
                 onDone = {
                     keyBoardController?.hide()
                 },
-
+                onSend ={
+                    keyBoardController?.hide()
+                    onSendAction?.let { it() }
+                }
                 ),
             colors = TextFieldDefaults.textFieldColors(
                 unfocusedIndicatorColor = MaterialTheme.colors.background,
@@ -73,9 +79,8 @@ fun InputTextField(
                 placeholderColor = MaterialTheme.colors.background,
                 leadingIconColor = MaterialTheme.colors.background.copy(alpha = 0.9f),
                 trailingIconColor = MaterialTheme.colors.background.copy(alpha = 0.9f)
-                )
-
-
+            ),
+            visualTransformation = visualTransformation,
         )
 
     }

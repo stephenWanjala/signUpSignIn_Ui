@@ -6,13 +6,14 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import com.wantech.smartCopier.R
 
 @Composable
 
@@ -52,12 +53,13 @@ fun TextInPutSection(
                     textValue = passwordState,
                     labelText = "Password",
                     tittle = "Your Password",
-
-                    trailingIconResource = R.drawable.ic_eye,
+                    trailingIcon =Icons.Default.Visibility,
+                    trailingIconResource = null,
                     onValueChange = { passwordState = it },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Password, imeAction = ImeAction.Done
-                    )
+                    ),
+                    visualTransformation = PasswordVisualTransformation('*')
                 )
 
                 Row(
